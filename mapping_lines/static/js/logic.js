@@ -4,22 +4,21 @@ console.log("Running");
 // Create the map object with a center and zoom level
 //let map = L.map('mapid').setView([29.592030308456227, -98.25682001668227], 4);
 
-// Create the map  object with a center and zoom level
-map = L.map('mapid', {
-		center: [34.0522, -118.2437],
-		zoom: 14,
-});
+// Create the map object with center at the San Francisco airport.
+let map = L.map('mapid').setView([37.6213, -122.3790], 5);
 
 // An array containing each city's location, state, and population.
-let cityData = cities;
+// Coordinates for each point to be used in the polyline.
+let line = [
+  [33.9416, -118.4085],
+  [37.6213, -122.3790],
+  [40.7899, -111.9791],
+  [47.4502, -122.3088]
+];
 
-cities.forEach(function(city) {
-		L.circleMarker(city.location, {
-				radius: city.population/100000,
-		})
-			.bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
-			.addTo(map);
-});
+L.polyline(line, {
+		color: 'yellow',
+}).addTo(map);
 
 // We create the tile layer that will be the background of our map.
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {

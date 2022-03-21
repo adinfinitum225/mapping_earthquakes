@@ -22,14 +22,14 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
 
 // Create a base layer that holds both maps.
 let baseMaps = {
-  "Satellite Streets": satelliteStreets,
-  "Streets": streets
+  "Streets": streets,
+  "Satellite": satelliteStreets,
 };
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-    center: [43.7, -79.3],
-    zoom: 11,
+    center: [39.5, -98.5],
+    zoom: 3,
     layers: [streets]
 })
 
@@ -37,7 +37,7 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the toronto GeoJSON URL
-let torontoHoods = "https://raw.githubusercontent.com/adinfinitum225/mapping_earthquakes/mapping_geoJSON_polygons/mapping_geoJSON_polygons/torontoNeighborhoods.json";
+let quakes = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Create a style for the lines
 let myStyle = {
@@ -47,12 +47,8 @@ let myStyle = {
 };
 
 // Grabbing our GeoJSON data.
-d3.json(torontoHoods).then(function(data) {
+d3.json(quakes).then(function(data) {
     console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
-  L.geoJSON(data, 
-		  {style: myStyle,
-				  onEachFeature: function(feature, layer){
-				  layer.bindPopup("<h3>" + feature.properties.AREA_NAME + "</h3>");}
-		  }).addTo(map);
+  L.geoJSON(data,).addTo(map);
 });

@@ -1,6 +1,6 @@
 # Mapping Earthquakes
 
-![Screenshot of webapp](earthquake_challenge/earthquake_challenge.png)
+![Screenshot of webapp](earthquake_challenge/mapping_earthquakes.png)
 
 ## Overview
 
